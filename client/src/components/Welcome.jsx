@@ -17,9 +17,26 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
   />
 );
 const Welcome = () => {
-  const { connectWallet, currentAccount } = useContext(TransactionContext);
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+  const {
+    connectWallet,
+    currentAccount,
+    formData,
+    isLoading,
+    sendTransaction,
+    handleChange,
+  } = useContext(TransactionContext);
+
+  const handleSubmit = (e) => {
+    const { addressTo, amount, keyword, message } = formData;
+    console.log("Submitted data:", { addressTo, amount, keyword, message });
+    // console.log(
+    //   formData
+    //   // `addressTo:${addressTo}, amount:${amount}, keyword:${keyword}, message:${message}`
+    // );
+    e.preventDefault();
+    if (!addressTo || !amount || !keyword || !message) return;
+    sendTransaction();
+  };
   return (
     <div className="flex w-full justify-center items-cener">
       <div className="flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4">
@@ -108,7 +125,7 @@ const Welcome = () => {
 
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-            {false ? (
+            {isLoading ? (
               <Loader />
             ) : (
               <button
