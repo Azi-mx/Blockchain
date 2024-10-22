@@ -32,10 +32,6 @@ export const TransactionsProvider = ({ children }) => {
       [name]: e.target.value,
     }));
   };
-  // const handleChange = (e, name) => {
-  //   setFormData((...prevState) => ({ ...prevState, [name]: e.target.value }));
-  //   console.log(formData, "formData");
-  // };
   const checkIfWalletIsConnect = async () => {
     try {
       if (!ethereum) return alert("Please Install Meta Mask");
